@@ -1,28 +1,30 @@
 ﻿using DevOps.Repository;
+using System;
 
 namespace DevOps.Domain
 {
     public class CalculadoraPagamento
     {
-        public static Pagamento CalcularPagamento(Fechamento fechamento)
+        public static Pagamento CalcularPagamento(FolhaPonto folhaPonto)
         {
-            var totalHorasNormais = 0m;
-            var totalExtra = 0m;
-            var pagamento = new Pagamento(fechamento.Funcionario, fechamento);
+            var valorTotalHoraNormal = 0m;
+            var valorTotalExtra = 0m;
+            var pagamento = new Pagamento(folhaPonto.Funcionario, folhaPonto);
 
-            foreach (var ponto in fechamento)
+            foreach (var ponto in folhaPonto)
             {
                 var cargaHorariaDoDia = ponto.ObterCargaHoraria();
-                totalHorasNormais = pagamento.CalcularHoraNormal(cargaHorariaDoDia);
+                valorTotalHoraNormal = pagamento.CalcularHoraNormal(cargaHorariaDoDia);
                 if (ponto.TemHoraExtra())
                 {
                     var cargaExtra = ponto.ObterCargaExtra();
-                    totalExtra += pagamento.CalcularHoraExtra(cargaExtra);
+                    valorTotalExtra += pagamento.CalcularHoraExtra(cargaExtra);
                 }
 
             }
 
-            pagamento.InformarSalario(totalHorasNormais, totalExtra);
+            pagamento.PagoEm = new DateTime(folhaPonto.Inicio.Year, folhaPonto.Inicio.Month, 5);
+            pagamento.InformarSalario(valorTotalHoraNormal, valorTotalExtra);
             return pagamento;
         }
     }

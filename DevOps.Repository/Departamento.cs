@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace DevOps.Repository
@@ -7,6 +8,7 @@ namespace DevOps.Repository
     public class Departamento
     {
         public int Id { get; set; }
+        [Display(Name = "Departamento")]
         public string Nome { get; set; }
 
         public static Faker<Departamento> Obter()

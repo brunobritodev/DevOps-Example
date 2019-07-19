@@ -4,13 +4,12 @@ namespace DevOps.Domain
 {
     public class RelatorioHoras
     {
-        public static FolhaPonto ReportarHoras(Fechamento fechamento)
+        public static FolhaPonto ReportarHoras(FolhaPonto folhaPonto)
         {
             var cargaHorariaNormal = 0D;
             var cargaExtra = 0D;
-            var folhaPonto = new FolhaPonto(fechamento.Funcionario, fechamento);
 
-            foreach (var ponto in fechamento)
+            foreach (var ponto in folhaPonto)
             {
                 cargaHorariaNormal += ponto.ObterCargaHoraria();
                 if (ponto.TemHoraExtra())

@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using Bogus;
+﻿using Bogus;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevOps.Repository
 {
     public class Pagamento
     {
-        public Pagamento(Funcionario funcionario, Fechamento fechamento)
+        public Pagamento() { }
+        public Pagamento(Funcionario funcionario, FolhaPonto folhaPonto)
         {
             this.Funcionario = funcionario;
-            PontoDigital = fechamento;
+            PontoDigital = folhaPonto;
         }
 
+
+        public int Id { get; set; }
         public decimal Salario { get; set; }
+        [Display(Name = "Pago em"), DataType(DataType.Date)]
         public DateTime PagoEm { get; set; }
         public Funcionario Funcionario { get; set; }
-        public List<PontoDigital> PontoDigital { get; set; }
+        public FolhaPonto PontoDigital { get; set; }
         public static Faker<Pagamento> Get()
         {
             return new Faker<Pagamento>()

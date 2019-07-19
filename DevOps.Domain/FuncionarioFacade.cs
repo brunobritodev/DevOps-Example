@@ -14,14 +14,14 @@ namespace DevOps.Domain
 
         public Pagamento CalcularPagamento(DateTime inicioCiclo)
         {
-            var fechamento = Fechamento.GerarFechamento(_funcionario, inicioCiclo);
-            return CalculadoraPagamento.CalcularPagamento(fechamento);
+            var folhaPonto = FolhaPonto.ComputarPeriodo(_funcionario, inicioCiclo);
+            return CalculadoraPagamento.CalcularPagamento(folhaPonto);
         }
 
         public FolhaPonto ReportarHoras(DateTime inicioCiclo)
         {
-            var fechamento = Fechamento.GerarFechamento(_funcionario, inicioCiclo);
-            return RelatorioHoras.ReportarHoras(fechamento);
+            var folhaPonto = FolhaPonto.ComputarPeriodo(_funcionario, inicioCiclo);
+            return RelatorioHoras.ReportarHoras(folhaPonto);
         }
     }
 }

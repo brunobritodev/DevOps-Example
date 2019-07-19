@@ -1,0 +1,119 @@
+﻿@model DevOps.Repository.Funcionario
+
+@{
+    ViewData["Title"] = "Details";
+}
+@functions{
+    public List<DateTime> ObterMesesTrabalho()
+    {
+        var meses = new List<DateTime>();
+        var mesAtual = Model.DataContratacao;
+        while (DateTime.Now > mesAtual)
+        {
+            if (Model.Demitido && mesAtual.Month >= Model.DataDemissao.Value.Month)
+                break;
+            if (Model.PontoDigital.Any(s => s.PontoEntrada.Month == mesAtual.Month && s.PontoEntrada.Year == mesAtual.Year))
+                meses.Add(new DateTime(mesAtual.Year, mesAtual.Month, 1));
+            mesAtual = mesAtual.AddMonths(1);
+        }
+
+        return meses;
+    }
+}
+
+<h2 class="text-primary">@Model.Nome</h2>
+<hr/>
+<div class="row">
+    <div class="col-6">
+        <h4>Funcionario</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Departamento.Nome)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Departamento.Nome)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Cargo)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Cargo)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ValorHora)
+            </dt>
+            <dd class="col-sm-8">
+                R$ @Html.DisplayFor(model => model.ValorHora)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.DataContratacao)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.DataContratacao)
+            </dd>
+
+            @if (Model.Demitido)
+            {
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Demitido)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Demitido)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.DataDemissao)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.DataDemissao)
+                </dd>
+            }
+        </dl>
+    </div>
+    <div class="col-6">
+        <h4>Salarios</h4>
+        <hr />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ano</th>
+                    <th>Mes</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mes in ObterMesesTrabalho())
+                {
+                    <tr>
+                        <td>@mes.Year</td>
+                        <td>@mes.Month</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-primary"
+                               asp-action="Pagamento"
+                               asp-route-id="@Model.Id"
+                               asp-route-mes="@mes.Month"
+                               asp-route-ano="@mes.Year">Pagamento</a>
+
+                            <a class="btn btn-sm btn-primary"
+                               asp-action="FolhaPonto"
+                               asp-route-id="@Model.Id"
+                               asp-route-mes="@mes.Month"
+                               asp-route-ano="@mes.Year">Folha de Ponto</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>

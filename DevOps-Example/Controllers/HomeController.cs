@@ -26,5 +26,10 @@ namespace DevOps.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult GerarMassa()
+        {
+            Repository = Repositorio.CriarRepositorio();
+            return RedirectToAction("Index");
+        }
     }
 }

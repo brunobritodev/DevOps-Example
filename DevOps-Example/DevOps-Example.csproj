@@ -18,6 +18,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\DevOps.Domain\DevOps.Domain.csproj" />
     <ProjectReference Include="..\DevOps.Repository\DevOps.Repository.csproj" />
   </ItemGroup>
 

@@ -1,9 +1,10 @@
-﻿using DevOps.Controllers;
+﻿using DevOps.Domain;
 using DevOps.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
-namespace DevOps_Example.Controllers
+namespace DevOps.Controllers
 {
     public class FuncionariosController : Controller
     {
@@ -11,6 +12,7 @@ namespace DevOps_Example.Controllers
 
         public FuncionariosController()
         {
+
             _context = HomeController.Repository;
         }
 
@@ -21,7 +23,7 @@ namespace DevOps_Example.Controllers
         }
 
         // GET: Funcionarios/Details/5
-        public IActionResult Details(int? id)
+        public IActionResult Detalhes(int? id)
         {
             if (id == null)
             {
@@ -35,6 +37,41 @@ namespace DevOps_Example.Controllers
             }
 
             return View(funcionario);
+        }
+
+        public IActionResult Pagamento(int? id, int mes, int ano)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var funcionario = _context.Funcionarios.FirstOrDefault(m => m.Id == id);
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
+
+            var service = new FuncionarioFacade(funcionario);
+            return View(service.CalcularPagamento(new DateTime(ano, mes, 1)));
+        }
+
+
+        public IActionResult FolhaPonto(int? id, int mes, int ano)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var funcionario = _context.Funcionarios.FirstOrDefault(m => m.Id == id);
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
+
+            var service = new FuncionarioFacade(funcionario);
+            return View(service.ReportarHoras(new DateTime(ano, mes, 1)));
         }
 
     }

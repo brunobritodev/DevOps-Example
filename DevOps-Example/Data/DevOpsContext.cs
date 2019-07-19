@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DevOps.Repository;
 using Microsoft.EntityFrameworkCore;
-using DevOps.Repository;
 
-namespace DevOps.Models
+namespace DevOps.Data
 {
     public class DevOpsContext : DbContext
     {
-        public DevOpsContext (DbContextOptions<DevOpsContext> options)
+        public DevOpsContext(DbContextOptions<DevOpsContext> options)
             : base(options)
         {
         }
-
+        public DbSet<FolhaPonto> FolhaPontos { get; set; }
+        public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<DevOps.Repository.Funcionario> Funcionario { get; set; }
+        public DbSet<DevOps.Repository.PontoDigital> PontoDigital { get; set; }
     }
 }

@@ -1,14 +1,19 @@
 ﻿using Bogus;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace DevOps.Repository
 {
+    [DebuggerDisplay("{PontoEntrada}")]
     public class PontoDigital
     {
         public int Id { get; set; }
+        [Display(Name = "Entrada")]
         public DateTime PontoEntrada { get; set; }
+        [Display(Name = "Saida")]
         public DateTime PontoSaida { get; set; }
-
+        public Funcionario Funcionario { get; set; }
         public static Faker<PontoDigital> Obter(DateTime dataReferencia)
         {
             var faker = new Faker();
