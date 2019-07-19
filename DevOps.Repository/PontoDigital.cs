@@ -24,7 +24,7 @@ namespace DevOps.Repository
 
         public double ObterCargaHoraria()
         {
-            return PontoSaida.Subtract(PontoEntrada).TotalHours;
+            return PontoSaida.Subtract(PontoEntrada).TotalHours - 1;
         }
 
         public bool TemHoraExtra()
