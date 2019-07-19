@@ -1,15 +1,14 @@
-﻿@model DevOps.Repository.FolhaPonto
-
+﻿@model DevOps.Domain.Fechamento
 @{
     ViewData["Title"] = "FolhaPonto";
 }
 
 
-<h2 class="text-primary">@Model.Funcionario.Nome</h2>
+<h2 class="text-primary">@Model.FolhaPonto.Funcionario.Nome</h2>
 
 <div class="row">
     <div class="col-6">
-        <p>Folha de ponto do período entre @Model.Inicio.ToString("dd/MM/yy") e @Model.Fim.ToString("dd/MM/yyyy")</p>
+        <p>Folha de ponto do período entre <b class="text-warning">@Model.FolhaPonto.Inicio.ToString("dd/MM/yy") e @Model.FolhaPonto.Fim.ToString("dd/MM/yyyy")</b></p>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -22,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.FolhaPonto)
                 {
                     <tr>
                         <td>
@@ -39,31 +38,7 @@
     <div class="col-6">
         <h4>Relatório</h4>
         <hr />
-        <div class="card mb-3">
-            <div class="card-header text-white bg-success">Consolidado</div>
-            <div class="card-body">
-                <dl class="row">
-                    <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.CargaHorariaNormal)
-                    </dt>
-                    <dd class="col-sm-8">
-                        @Model.CargaHorariaNormal.ToString("N")
-                    </dd>
-                    <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.CargaHorariaExtra)
-                    </dt>
-                    <dd class="col-sm-8">
-                        @Model.CargaHorariaExtra.ToString("N")
-                    </dd>
-                    <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.TotalHoras)
-                    </dt>
-                    <dd class="col-sm-8">
-                        @Model.TotalHoras.ToString("N")
-                    </dd>
-                </dl>
-            </div>
-        </div>
-        <a asp-action="Detalhes" asp-route-id="@Model.Funcionario.Id">Voltar</a>
+        <partial name="_RelatorioHoras" model="@Model.FolhaPonto" />
+        <a asp-action="Detalhes" asp-route-id="@Model.FolhaPonto.Funcionario.Id">Voltar</a>
     </div>
 </div>

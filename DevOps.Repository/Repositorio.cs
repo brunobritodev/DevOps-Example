@@ -14,10 +14,8 @@ namespace DevOps.Repository
             var faker = new Faker();
             var repo = new Repositorio();
 
-            var mesesParaGerar = faker.Random.Int(1, 3);
-
             repo.Departamentos = Departamento.Obter().Generate(5);
-            repo.Funcionarios = Funcionario.Obter(mesesParaGerar).Generate(faker.Random.Int(1, 20));
+            repo.Funcionarios = Funcionario.Obter().Generate(faker.Random.Int(1, 20));
 
             Parallel.ForEach(repo.Funcionarios, (funcionario) =>
             {

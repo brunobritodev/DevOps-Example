@@ -6,15 +6,12 @@ namespace DevOps.Repository
 {
     public class Pagamento
     {
-        public Pagamento() { }
         public Pagamento(Funcionario funcionario, FolhaPonto folhaPonto)
         {
             this.Funcionario = funcionario;
             PontoDigital = folhaPonto;
         }
 
-
-        public int Id { get; set; }
         public decimal Salario { get; set; }
         [Display(Name = "Pago em"), DataType(DataType.Date)]
         public DateTime PagoEm { get; set; }

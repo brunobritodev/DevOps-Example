@@ -51,9 +51,10 @@ namespace DevOps.Controllers
             {
                 return NotFound();
             }
-
+            var inicioCiclo = new DateTime(ano, mes, 1);
+            var fimCiclo = inicioCiclo.AddMonths(1);
             var service = new FuncionarioFacade(funcionario);
-            return View(service.CalcularPagamento(new DateTime(ano, mes, 1)));
+            return View(service.FecharCiclo(inicioCiclo, fimCiclo));
         }
 
 
@@ -70,8 +71,10 @@ namespace DevOps.Controllers
                 return NotFound();
             }
 
+            var inicioCiclo = new DateTime(ano, mes, 1);
+            var fimCiclo = inicioCiclo.AddMonths(1);
             var service = new FuncionarioFacade(funcionario);
-            return View(service.ReportarHoras(new DateTime(ano, mes, 1)));
+            return View(service.FecharCiclo(inicioCiclo, fimCiclo));
         }
 
     }

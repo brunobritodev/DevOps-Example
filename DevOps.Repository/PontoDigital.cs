@@ -8,7 +8,6 @@ namespace DevOps.Repository
     [DebuggerDisplay("{PontoEntrada}")]
     public class PontoDigital
     {
-        public int Id { get; set; }
         [Display(Name = "Entrada")]
         public DateTime PontoEntrada { get; set; }
         [Display(Name = "Saida")]

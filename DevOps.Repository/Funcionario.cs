@@ -24,7 +24,7 @@ namespace DevOps.Repository
         public DateTime? DataDemissao { get; set; }
         public Departamento Departamento { get; set; }
         public List<PontoDigital> PontoDigital { get; set; }
-        public static Faker<Funcionario> Obter(int mesesParaGerar)
+        public static Faker<Funcionario> Obter()
         {
             var faker = new Faker();
             var demitido = faker.Random.Bool(0.1f);

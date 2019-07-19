@@ -1,4 +1,4 @@
-﻿@model DevOps.Repository.Pagamento
+﻿@model DevOps.Domain.Fechamento
 
 @{
     ViewData["Title"] = "Pagamento";
@@ -6,23 +6,32 @@
 
 <h2 class="text-primary">@Model.Funcionario.Nome</h2>
 
-<div>
-    <p>Pagamento do período entre @Model.PontoDigital.Inicio.ToString("dd/MM/yy") e @Model.PontoDigital.Fim.ToString("dd/MM/yyyy")</p>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Salario)
-        </dt>
-        <dd class="col-sm-10">
-            R$ @Model.Salario.ToString("N")
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PagoEm)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PagoEm)
-        </dd>
-    </dl>
+<div class="row">
+
+    <div class="col-6">
+        <p>Pagamento do período entre <b class="text-warning">@Model.Pagamento.PontoDigital.Inicio.ToString("dd/MM/yy") e @Model.Pagamento.PontoDigital.Fim.ToString("dd/MM/yyyy")</b></p>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Pagamento.Salario)
+            </dt>
+            <dd class="col-sm-8">
+                R$ @Model.Pagamento.Salario.ToString("N")
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Pagamento.PagoEm)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Pagamento.PagoEm)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-6">
+        <h4>Relatório</h4>
+        <hr />
+        <partial name="_RelatorioHoras" model="@Model.FolhaPonto" />
+    </div>
 </div>
 <div>
     <a asp-action="Detalhes" asp-route-id="@Model.Funcionario.Id">Voltar</a>

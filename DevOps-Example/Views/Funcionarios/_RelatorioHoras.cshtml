@@ -1,0 +1,30 @@
+﻿@model DevOps.Repository.FolhaPonto
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="card mb-3">
+    <div class="card-header text-white bg-success">Consolidado</div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CargaHorariaNormal)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.TimeSpanString(Model.CargaHorariaNormal)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CargaHorariaExtra)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.TimeSpanString(Model.CargaHorariaExtra)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.TotalHoras)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.TimeSpanString(Model.TotalHoras)
+            </dd>
+        </dl>
+    </div>
+</div>

@@ -12,13 +12,18 @@ namespace DevOps.Domain
             _funcionario = funcionario;
         }
 
-        public Pagamento CalcularPagamento(DateTime inicioCiclo)
+        public Fechamento FecharCiclo(DateTime inicio, DateTime fim)
+        {
+            return Fechamento.Novo(_funcionario).Adicionar(CalcularPagamento(inicio)).Adicionar(RelatoHoras(inicio));
+        }
+
+        private Pagamento CalcularPagamento(DateTime inicioCiclo)
         {
             var folhaPonto = FolhaPonto.ComputarPeriodo(_funcionario, inicioCiclo);
             return CalculadoraPagamento.CalcularPagamento(folhaPonto);
         }
 
-        public FolhaPonto ReportarHoras(DateTime inicioCiclo)
+        private FolhaPonto RelatoHoras(DateTime inicioCiclo)
         {
             var folhaPonto = FolhaPonto.ComputarPeriodo(_funcionario, inicioCiclo);
             return RelatorioHoras.ReportarHoras(folhaPonto);
