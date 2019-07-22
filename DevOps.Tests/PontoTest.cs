@@ -13,13 +13,12 @@ namespace DevOps.Tests
             var ponto = new PontoDigital { PontoEntrada = DateTime.Now.Date.AddHours(9), PontoSaida = DateTime.Now.Date.AddHours(20) };
 
             ponto.ObterCargaExtra().Should().Be(2);
-
         }
 
         [Fact]
         public void DeveIndicarHorasExtra()
         {
-            var ponto = new PontoDigital { PontoEntrada = DateTime.Now.Date.AddHours(9), PontoSaida = DateTime.Now.Date.AddHours(19) };
+            var ponto = new PontoDigital { PontoEntrada = DateTime.Now.Date.AddHours(9), PontoSaida = DateTime.Now.Date.AddHours(18) };
 
             ponto.TemHoraExtra().Should().Be(true);
         }
