@@ -10,7 +10,7 @@ namespace DevOps.Tests
         [Fact]
         public void DeveTerDuasHorasExtras()
         {
-            var ponto = new PontoDigital { PontoEntrada = DateTime.Now.Date.AddHours(9), PontoSaida = DateTime.Now.Date.AddHours(20) };
+            var ponto = new PontoDigital { PontoEntrada = DateTime.Now.Date.AddHours(9), PontoSaida = DateTime.Now.Date.AddHours(19) };
 
             ponto.ObterCargaExtra().Should().Be(2);
         }
