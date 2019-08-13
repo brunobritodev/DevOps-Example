@@ -17,12 +17,12 @@
             mesAtual = mesAtual.AddMonths(1);
         }
 
-        return meses;
+        return meses.OrderByDescending(a => a.Year).ThenByDescending(a => a.Month).ToList();
     }
 }
 
 <h2 class="text-primary">@Model.Nome</h2>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-6">
         <h4>Funcionario</h4>
