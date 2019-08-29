@@ -12,7 +12,7 @@ namespace DevOps.Tests
         {
             var ponto = new PontoDigital { PontoEntrada = DateTime.Now.Date.AddHours(9), PontoSaida = DateTime.Now.Date.AddHours(19) };
 
-            ponto.ObterCargaExtra().Should().Be(2);
+            ponto.ObterCargaExtra().Should().Be(1);
 
         }
 
