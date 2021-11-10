@@ -1,14 +1,18 @@
 ﻿using DevOps.Models;
 using DevOps.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace DevOps.Controllers
 {
     public class HomeController : Controller
     {
-        static HomeController()
+        private readonly ImagemEventoModel _settings;
+
+        public HomeController(IOptions<ImagemEventoModel> settings)
         {
+            _settings = settings.Value;
             Repository = Repositorio.CriarRepositorio();
         }
 
@@ -16,7 +20,7 @@ namespace DevOps.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_settings);
         }
 
 
@@ -29,7 +33,7 @@ namespace DevOps.Controllers
         public IActionResult GerarMassa()
         {
             Repository = Repositorio.CriarRepositorio();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Funcionarios");
         }
     }
 }

@@ -1,32 +1,29 @@
-﻿@{
+﻿@model DevOps.Models.ImagemEventoModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">DevOps End-to-End</h1>
-    <p>Projeto exemplo para demonstrar um processo DevOps.</p>
+    <h1 class="display-4">DevOps Demo</h1>
+    <p>Projeto exemplo para demos de Devops.</p>
 </div>
 <div class="text-center">
-    <button class="btn btn-success" asp-action="GerarMassa">Gerar massa</button>
+    <a class="btn btn-success" asp-action="GerarMassa">Gerar massa</a>
 </div>
+
+
 
 
 <div class="row justify-content-center">
     <div class="col col-6 ">
         <div class="card mb-3">
-            <div class="card-header text-white bg-success">Com orgulho apresentado para:</div>
-            <div class="card-body">
+            <div class="card-header text-white bg-success">Versão: 1.0</div>
+            <div class="card-body text-center">
+                <b>@Model.Descricao</b>
+                <br />
                 <div class="row">
-                    <div class="col col-6">
-                        <ul>
-                            <li>Caio</li>
-                            <li>Francisco</li>
-                            <li>Thiago</li>
-                            <li>Paulo</li>
-                        </ul>
-                    </div>
-                    <div class="col col-6">
-                        <img src="images/portoseguro.png" alt="Porto Seguro" />
+                    <div class="col col-12">
+                        <img src="@Model.Imagem" class="img-fluid" alt="@Model.Descricao" />
                     </div>
                 </div>
             </div>
