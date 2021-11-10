@@ -9,12 +9,12 @@ COPY ["DevOps-Example/DevOps-Example.csproj", "DevOps-Example/"]
 RUN dotnet restore "DevOps-Example/DevOps-Example.csproj"
 COPY . .
 WORKDIR "/src/DevOps-Example"
-RUN dotnet build "DevOps-Example.csproj" -c Release -o /app
+RUN dotnet build "DevOps-Example.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DevOps-Example.csproj" -c Release -o /app
+RUN dotnet publish "DevOps-Example.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DevOps-Example.dll"]

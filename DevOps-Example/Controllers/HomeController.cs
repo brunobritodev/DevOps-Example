@@ -13,7 +13,6 @@ namespace DevOps.Controllers
         public HomeController(IOptions<ImagemEventoModel> settings)
         {
             _settings = settings.Value;
-            Repository = Repositorio.CriarRepositorio();
         }
 
         public static Repositorio Repository { get; set; }
